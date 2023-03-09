@@ -39,10 +39,6 @@ footer {
   border-bottom-right-radius: 0;
 }
 
-.search-bar__user-icon {
-  margin-right: 5px;
-}
-
 #search-bar__search-button {
   background-color: #7bd14a;
   padding-top: 2px;
@@ -50,6 +46,10 @@ footer {
   border-left: none;
   border-top-right-radius: 8px;
   border-bottom-right-radius: 8px;
+}
+
+.nav-bar__user-icon {
+  margin-right: 5px;
 }
 
 button {

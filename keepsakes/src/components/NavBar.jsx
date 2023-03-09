@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import logo from '..//logo/logo-name-only.png';
 import '../css/nav-and-footer.css';
 import SearchIcon from '@mui/icons-material/Search';
@@ -10,7 +11,18 @@ function NavBar({ currentUser, basket }) {
   const [searchBarContents, setSearchBarContents] = useState(null);
   return (
     <nav className="nav-bar">
-      <img src={logo} alt="logo" id="main-logo" />
+      <Link
+        to="/"
+        style={{
+          width: '75px',
+          display: 'flex',
+          justifyContent: 'center',
+          borderRadius: '10%',
+          margin: '5px',
+        }}
+      >
+        <img src={logo} alt="logo" id="main-logo" />
+      </Link>
 
       <form className="search-bar" action="">
         <input type="text" className="search-bar__input" />
@@ -27,9 +39,11 @@ function NavBar({ currentUser, basket }) {
         <HistoryIcon />
       </button>
 
-      <button className="search-bar__user-icon">
-        <AccountCircleIcon />
-      </button>
+      <Link to="/new-listing">
+        <button className="nav-bar__user-icon">
+          <AccountCircleIcon />
+        </button>
+      </Link>
     </nav>
   );
 }

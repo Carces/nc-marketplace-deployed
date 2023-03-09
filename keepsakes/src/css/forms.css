@@ -1,4 +1,5 @@
-.contact-form {
+.contact-form,
+.new-listing-form {
   margin: 25% 30px;
   padding: 10px;
   text-align: center;
@@ -7,7 +8,8 @@
   border-radius: 10px;
 }
 
-.contact-form__input {
+.contact-form__input,
+.new-listing-form__input {
   width: 90%;
   margin: 5px 0px;
   border-radius: 8px;
@@ -22,11 +24,13 @@
   min-height: 200px;
 }
 
-.contact-form__header {
+.contact-form__header,
+.new-listing-form__header {
   margin-bottom: 10px;
 }
 
-.contact-form__submit-button {
+.contact-form__submit-button,
+.new-listing-form__submit-button {
   background-color: #7bd14a;
   margin-top: 10px;
   padding: 5px;
