@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import './App.css';
-import {Routes, Route} from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom';
 
-// import AboutUs from './components/AboutUs';
+import AboutUs from './components/AboutUs';
 // import Checkout from './components/Checkout';
-// import Contact from './components/Contact';
-// import Footer from './components/Footer';
+import Contact from './components/Contact';
+import Footer from './components/Footer';
 // import ItemPage from './components/ItemPage';
 // import LatestDeals from './components/LatestDeals';
 // import Listings from './components/Listings';
@@ -20,8 +20,10 @@ function App() {
     <div className="App">
       <NavBar />
       <Routes>
-        {/* <Route path="/" element={} /> */}
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/about-us" element={<AboutUs />} />
       </Routes>
+      <Footer />
     </div>
   );
 }
