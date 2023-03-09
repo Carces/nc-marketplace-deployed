@@ -1,0 +1,29 @@
+.nav-bar {
+  display: flex;
+  align-items: center;
+}
+
+#main-logo {
+  min-width: 60px;
+  border-radius: 10%;
+  margin: 5px;
+}
+
+.search-bar {
+  padding: 5px;
+  margin-bottom: 0px;
+  display: flex;
+}
+
+.search-bar__input {
+  border: 1px solid black;
+  border-radius: 8px;
+}
+
+/* .search-bar__icon {
+  background-color: ;
+} */
+
+button {
+  background-color: transparent;
+}
