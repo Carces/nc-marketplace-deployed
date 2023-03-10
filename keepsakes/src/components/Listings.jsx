@@ -9,12 +9,8 @@ function Listings() {
   const [searchOptions, setSearchOptions] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [listings, setListings] = useState([]);
-  const [isLoaded, setIsLoaded] = useState(false);
-
-  if (listings[0]) setIsLoaded(true);
 
   useEffect(() => {
-    setIsLoaded(false);
     fetchListings(searchOptions, currentPage).then((items) => {
       setListings(items);
     });
@@ -31,8 +27,7 @@ function Listings() {
       <PageControls
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
-        listing={listings}
-        isLoaded={isLoaded}
+        searchOptions={searchOptions}
       />
     </div>
   );

@@ -4,6 +4,14 @@ const api = axios.create({
   baseURL: `https://nc-marketplace-sem-4.onrender.com/api/`,
 });
 
+export const fetchListingsLength = (searchOptions) => {
+  let path = `/items`;
+
+  return api.get(path).then(({ data: { items } }) => {
+    return items.length;
+  });
+};
+
 export const fetchListings = (searchOptions, currentPage) => {
   let path = `/items?limit=10&p=${currentPage}`;
 
