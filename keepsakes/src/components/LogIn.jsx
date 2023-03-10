@@ -15,13 +15,13 @@ function LogIn() {
     fetchUser(username)
       .then((user) => {
         if (!user) setUserNotFound(true);
-        console.log('THEN <<<');
+        // console.log('THEN <<<');
       })
       .catch((err) => {
         // setIsLoading(false);
         // setIsError(true);
         setUserNotFound(true);
-        console.log('CATCH <<<');
+        // console.log('CATCH <<<');
       });
   }
 
@@ -51,5 +51,5 @@ function LogIn() {
     </div>
   );
 }
-
+ 
 export default LogIn;
