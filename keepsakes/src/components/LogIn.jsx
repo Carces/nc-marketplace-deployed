@@ -4,17 +4,19 @@ import { CurrentUserContext } from '../contexts/CurrentUser';
 import Alert from '@mui/material/Alert';
 
 function LogIn() {
-  const [username, setUsername] = useState('fasfa');
+  const [username, setUsername] = useState('');
   const [userNotFound, setUserNotFound] = useState(false);
-  const currentUser = useContext(CurrentUserContext);
+  const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
 
-  console.log(userNotFound, '<<< U NOT FOUND');
   function validateUsername(event) {
     setUserNotFound(false);
     event.preventDefault();
     fetchUser(username)
       .then((user) => {
         if (!user) setUserNotFound(true);
+        else {
+          setCurrentUser(user);
+        }
         // console.log('THEN <<<');
       })
       .catch((err) => {
@@ -27,7 +29,7 @@ function LogIn() {
 
   const form = (
     <form className="log-in-form">
-      <h1 className="log-in-form__header">New Listing</h1>
+      <h1 className="log-in-form__header">Log In</h1>
       <section id="log-in-form__username-section">
         <input
           id="log-in-form__username-input"
@@ -51,5 +53,5 @@ function LogIn() {
     </div>
   );
 }
- 
+
 export default LogIn;

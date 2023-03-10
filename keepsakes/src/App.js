@@ -8,7 +8,7 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 import ItemPage from './components/ItemPage';
 import LatestDeals from './components/LatestDeals';
-// import Listings from './components/Listings';
+import Listings from './components/Listings';
 import NavBar from './components/NavBar';
 import NewListing from './components/NewListing';
 
@@ -27,6 +27,7 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/about-us" element={<AboutUs />} />
         <Route path="/new-listing" element={<NewListing />} />
+        <Route path="/items" element={<Listings />} />
       </Routes>
       <Footer />
     </div>

@@ -1,30 +1,42 @@
-import {fetchItemById} from "../api";
-import { BasketContext } from "../contexts/Basket";
-import Alert from "@mui/material/Alert";
-import { useParams } from "react-router-dom";
-import { useState, useContext, useEffect } from "react";
+import { fetchItemById } from '../api';
+import { BasketContext } from '../contexts/Basket';
+import Alert from '@mui/material/Alert';
+import { Link, useParams } from 'react-router-dom';
+import { useState, useContext, useEffect } from 'react';
 
 function ItemPage() {
   const [itemDetails, setItemDetails] = useState('');
   const { setBasket } = useContext(BasketContext);
-  const [itemNotFound, setItemNotFound] = useState(false)
-  const successfulBasketAdd = <Alert severity="success">Added To Basket</Alert>
-  const itemNotFoundError = <Alert severity="error">Item not found</Alert>
+  const [itemNotFound, setItemNotFound] = useState(false);
+  const successfulBasketAdd = <Alert severity="success">Added To Basket</Alert>;
+  const itemNotFoundError = <Alert severity="error">Item not found</Alert>;
   const { item_id } = useParams();
-  const {item_name, description, price, category_name, img_url} = itemDetails;
+  const { item_name, description, price, category_name, img_url } = itemDetails;
+
+  function addToBasket() {
+    setBasket((basket) => {
+      const updatedBasket = [itemDetails, ...basket];
+      return updatedBasket;
+    });
+  }
+
+  function buyNow() {
+    setBasket((basket) => {
+      const updatedBasket = [itemDetails, ...basket];
+      return updatedBasket;
+    });
+  }
 
   useEffect(() => {
-    setItemNotFound(false)
+    setItemNotFound(false);
     fetchItemById(item_id)
-    .then((item) => {
-      setItemDetails(item)
-      console.log(item)
-    })
-    .catch(err => {
-      console.log(err);
-      setItemNotFound(true);
-    })
-  }, [])
+      .then((item) => {
+        setItemDetails(item);
+      })
+      .catch((err) => {
+        setItemNotFound(true);
+      });
+  }, []);
 
   const itemPageContent = (
     <div className="page-content">
@@ -33,14 +45,18 @@ function ItemPage() {
       <img src={img_url} className="item-page__image"></img>
       <p>{description}</p>
       <p>£{price}</p>
+      <button className="item-page__button" onClick={addToBasket}>
+        Add To Basket
+      </button>
+      <Link to="/checkout">
+        <button className="item-page__button" onClick={buyNow}>
+          Buy Now
+        </button>
+      </Link>
     </div>
   );
 
-  return (
-    <>
-      {itemNotFound ? itemNotFoundError : itemPageContent}
-    </>
-  );
+  return <>{itemNotFound ? itemNotFoundError : itemPageContent}</>;
 }
 
 export default ItemPage;

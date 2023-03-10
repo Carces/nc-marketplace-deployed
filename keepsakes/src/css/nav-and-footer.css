@@ -4,12 +4,14 @@ footer {
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 3;
 }
 
 .nav-bar {
   border-bottom: 2px ridge #969696;
   padding-top: 5px;
   padding-bottom: 5px;
+  position: fixed;
 }
 
 footer {
