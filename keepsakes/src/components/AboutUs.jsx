@@ -1,8 +1,8 @@
-import '../css/about-us.css'
+import '../css/about-us.css';
 
 function AboutUs() {
   return (
-    <div className="about-us-container">
+    <div className="page-content about-us">
       <h1>Welcome to Keepsakes!</h1>
       <p>
         We are an online store that specialises in vintage items from the past.

@@ -1,6 +1,6 @@
 .nav-bar,
 footer {
-  background-color: #969696;
+  background-color: #a8a8a8;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -9,15 +9,19 @@ footer {
 
 .nav-bar {
   border-bottom: 2px ridge #969696;
-  padding-top: 5px;
-  padding-bottom: 5px;
   position: fixed;
+  width: 100%;
+  padding: 2px;
+  padding-bottom: 15px;
 }
 
 footer {
+  position: absolute;
+  bottom: 0;
+  background-color: #c7c7c7;
   width: 100%;
-  padding: 8px;
-  padding-left: 0;
+  padding: 2px 0;
+  padding-bottom: 3px;
   border-top: 2px ridge #969696;
 }
 
@@ -27,13 +31,70 @@ footer {
   margin: 5px;
 }
 
-.search-bar {
-  margin-bottom: 0px;
+#main-logo:hover {
+  filter: brightness(1.2);
+}
+
+.nav-bar__icon:hover {
+  color: rgb(66, 66, 66);
+}
+
+.nav-bar__basket {
+  position: relative;
+  margin-right: 3px;
+}
+
+.nav-bar__history {
+  margin-right: 3px;
+}
+
+.nav-bar__user {
   margin-right: 5px;
+}
+
+.nav-bar__avatar {
+  width: 17px;
+  margin-left: 2px;
+  height: auto;
+  object-fit: cover;
+  border: 2px solid rgb(0, 0, 0);
+  border-radius: 50%;
+}
+
+.nav-bar__basket-indicator {
+  font-weight: bold;
+  font-size: 0.8em;
+  position: absolute;
+  background-color: rgb(219, 52, 52);
+  padding: 0 4px;
+  border-radius: 50%;
+  bottom: 20px;
+  left: 15px;
+  text-align: center;
+  box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.247);
+}
+
+.nav-bar__categories {
+  position: absolute;
+  top: 43px;
+  display: flex;
+  font-size: 0.85em;
+  font-weight: bold;
+}
+.nav-bar__category {
+  margin: 0 10px;
+}
+
+.search-bar {
+  margin: 5px;
   display: flex;
 }
 
 .search-bar__input {
+  position: relative;
+  bottom: 1px;
+  width: 150px;
+  height: 22px;
   padding-left: 5px;
   border: 1px solid #2f2f2f;
   border-radius: 8px;
@@ -42,16 +103,23 @@ footer {
 }
 
 #search-bar__search-button {
-  background-color: #7bd14a;
+  background-color: #fccd4b;
+  margin-right: 2px;
   padding-top: 2px;
   border: 1px solid #2f2f2f;
   border-left: none;
   border-top-right-radius: 8px;
   border-bottom-right-radius: 8px;
+  position: relative;
+  bottom: 1px;
 }
 
-.nav-bar__user-icon {
-  margin-right: 5px;
+#search-bar__search-button:hover {
+  filter: brightness(1.05);
+}
+
+.search-bar__icon {
+  height: 17px !important;
 }
 
 button {
@@ -62,21 +130,38 @@ button {
   margin: 0 30px;
 }
 
+.footer__link:hover {
+  color: #575757;
+}
+
+.user-menu {
+  background-color: #d1d1d1;
+  text-align: left;
+  position: absolute;
+  z-index: 5;
+  right: 10px;
+  top: 40px;
+  box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.418);
+  border: 1px solid rgb(184, 184, 184);
+  border-radius: 3px;
+}
+
+.user-menu__option {
+  font-weight: bold;
+  margin: 5px;
+}
+
+.user-menu__name {
+  background-color: #fccd4b;
+  font-weight: bold;
+  border-bottom: 1px solid rgb(161, 161, 161);
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  padding: 2px 5px;
+  text-align: center;
+}
+
 a {
   text-decoration: none;
   color: inherit;
-}
-
-.nav-bar__basket {
-  position: relative;
-}
-
-.nav-bar__basket-indicator {
-  position: absolute;
-  background-color: red;
-  padding: 1px 4px;
-  border-radius: 50%;
-  bottom: 20px;
-  left: 15px;
-  text-align: center;
 }

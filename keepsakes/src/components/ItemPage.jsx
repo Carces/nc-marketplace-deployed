@@ -3,6 +3,7 @@ import { BasketContext } from '../contexts/Basket';
 import Alert from '@mui/material/Alert';
 import { Link, useParams } from 'react-router-dom';
 import { useState, useContext, useEffect } from 'react';
+import '../css/item-page.css';
 
 function ItemPage() {
   const [itemDetails, setItemDetails] = useState('');
@@ -39,12 +40,12 @@ function ItemPage() {
   }, []);
 
   const itemPageContent = (
-    <div className="page-content">
+    <div className="page-content item-page">
       <h2>{item_name}</h2>
-      <p>{category_name}</p>
+      <p className="item-page__category">Category: {category_name}</p>
       <img src={img_url} className="item-page__image"></img>
+      <p className="item-page__price">£{price}</p>
       <p>{description}</p>
-      <p>£{price}</p>
       <button className="item-page__button" onClick={addToBasket}>
         Add To Basket
       </button>

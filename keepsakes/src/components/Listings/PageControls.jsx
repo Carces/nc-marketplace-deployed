@@ -11,25 +11,31 @@ function PageControls({ currentPage, setCurrentPage, searchOptions }) {
     });
   }, [searchOptions]);
 
-  const pageOptions = ['Previous', currentPage, 'Next'];
+  const pageOptions = ['Back', currentPage, 'Next'];
 
   const pageOptionsHTML = pageOptions.map((option) => {
     const isFirstPage = currentPage === 1;
     const isLastPage = currentPage > totalItems / 10;
 
     const currentPageClassName =
-      (isFirstPage && option === 'Previous') ||
-      (isLastPage && option === 'Next')
+      (isFirstPage && option === 'Back') || (isLastPage && option === 'Next')
         ? 'page-controls__option page-controls__disabled'
         : 'page-controls__option';
 
+    const pageNumHTML = (
+      <>
+        <span className="page-controls__separator"> | </span>
+        {option}
+        <span className="page-controls__separator"> | </span>
+      </>
+    );
+
     const handleClick =
-      (isFirstPage && option === 'Previous') ||
-      (isLastPage && option === 'Next')
+      (isFirstPage && option === 'Back') || (isLastPage && option === 'Next')
         ? () => null
         : () =>
             setCurrentPage(
-              option === 'Previous'
+              option === 'Back'
                 ? currentPage - 1
                 : option === 'Next'
                 ? currentPage + 1
@@ -38,7 +44,7 @@ function PageControls({ currentPage, setCurrentPage, searchOptions }) {
 
     return (
       <p className={currentPageClassName} key={option} onClick={handleClick}>
-        {option}
+        {option === currentPage ? pageNumHTML : option}
       </p>
     );
   });

@@ -37,17 +37,17 @@ function NewListing() {
   }
 
   const newListingSuccess = (
-    <div className="page-content new-listing__success">
+    <div className="new-listing__success">
       <Alert severity="success">Item Listed Successfully</Alert>
     </div>
   );
   const newListingError = (
-    <div className="page-content new-listing__error">
+    <div className="new-listing__error">
       <Alert severity="error">Item Listing Failed</Alert>
     </div>
   );
   const form = (
-    <form className="new-listing-form" onSubmit={handleSubmit}>
+    <form className="page-content new-listing-form" onSubmit={handleSubmit}>
       <h1 className="new-listing-form__header">New Listing</h1>
       <section id="new-listing-form__name-section">
         <input
@@ -113,7 +113,18 @@ function NewListing() {
   return (
     <>
       {isError ? newListingError : <></>}
-      {isSuccessful ? newListingSuccess : currentUser ? form : logIn}
+      {isSuccessful ? (
+        newListingSuccess
+      ) : currentUser ? (
+        form
+      ) : (
+        <>
+          <Alert className="new-listing__log-in-warning" severity="warning">
+            You must be logged in to list an item
+          </Alert>
+          {logIn}
+        </>
+      )}
     </>
   );
 }

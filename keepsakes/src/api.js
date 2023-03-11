@@ -14,9 +14,21 @@ export const fetchListingsLength = (searchOptions) => {
 
 export const fetchListings = (searchOptions, currentPage) => {
   let path = `/items?limit=10&p=${currentPage}`;
+  if (searchOptions) {
+    if (searchOptions.category_name)
+      path += `&category_name=${searchOptions.category_name}`;
+    if (searchOptions.search) path += `&search=${searchOptions.search}`;
+  }
 
   return api.get(path).then(({ data: { items } }) => {
     return items;
+  });
+};
+
+export const fetchItemIDs = () => {
+  return api.get(`/items`).then(({ data: { items } }) => {
+    const itemIDs = items.map((item) => item.item_id);
+    return itemIDs;
   });
 };
 
@@ -27,8 +39,8 @@ export const fetchItemById = (item_id) => {
 };
 
 export const fetchLatestDeals = () => {
-  return api.get('/items').then(({ data }) => {
-    return data;
+  return api.get('/items').then(({ data: { items } }) => {
+    return items;
   });
 };
 
@@ -38,8 +50,22 @@ export const fetchUser = (username) => {
   });
 };
 
+export const postUser = (user) => {
+  return api.post('/users', user).then(({ data: { user } }) => {
+    return user;
+  });
+};
+
 export const postItem = (item) => {
   return api.post('/items', item).then(({ data }) => {
     return data;
   });
+};
+
+export const postOrder = (item_id, username) => {
+  return api
+    .post(`/users/${username}/orders`, { item_id })
+    .then(({ data: { item } }) => {
+      return item;
+    });
 };

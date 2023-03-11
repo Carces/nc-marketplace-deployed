@@ -7,11 +7,27 @@
   /* font-family: 'Ubuntu', sans-serif; */
 }
 
+.page-content {
+  margin: 25% 30px;
+  margin-top: 0;
+  position: relative;
+  top: 100px;
+  padding: 10px;
+  text-align: center;
+  background-color: #e7e7e7;
+  border: 1px solid #dddddd;
+  border-radius: 10px;
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.103);
+}
+
+.page-content__text {
+  margin: 20px;
+}
+
 body {
   background-color: #f1f1f1;
 }
 
-footer {
-  position: fixed;
-  bottom: 0;
+.App {
+  padding-bottom: 40px;
 }

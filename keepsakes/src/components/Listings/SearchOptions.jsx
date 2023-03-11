@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-function SearchOptions({ setSearchOptions }) {
+function SearchOptions({ searchOptions, setSearchOptions }) {
   const [searchOrderBy, setSearchOrderBy] = useState(null);
   // ... other local states for inputs
 

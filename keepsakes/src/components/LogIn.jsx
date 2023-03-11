@@ -1,21 +1,39 @@
 import { useContext, useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { fetchUser } from '../api';
 import { CurrentUserContext } from '../contexts/CurrentUser';
 import Alert from '@mui/material/Alert';
+import '../css/forms.css';
 
 function LogIn() {
   const [username, setUsername] = useState('');
   const [userNotFound, setUserNotFound] = useState(false);
+  const [isReturningToCheckout, setIsReturningToCheckout] = useState(false);
   const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
+  const navigate = useNavigate();
+  const { checkout } = useParams();
+
+  const loggedInUsername = !currentUser ? null : currentUser.username;
+
+  if (isReturningToCheckout)
+    delayReturnToCheckout().then(() => navigate('/checkout'));
+
+  function delayReturnToCheckout() {
+    return new Promise(function (resolve, reject) {
+      setTimeout(resolve, 1000);
+    });
+  }
 
   function validateUsername(event) {
     setUserNotFound(false);
+    setIsReturningToCheckout(false);
     event.preventDefault();
     fetchUser(username)
       .then((user) => {
         if (!user) setUserNotFound(true);
         else {
           setCurrentUser(user);
+          if (checkout === 'checking-out') setIsReturningToCheckout(true);
         }
         // console.log('THEN <<<');
       })
@@ -28,7 +46,7 @@ function LogIn() {
   }
 
   const form = (
-    <form className="log-in-form">
+    <form className="page-content log-in-form">
       <h1 className="log-in-form__header">Log In</h1>
       <section id="log-in-form__username-section">
         <input
@@ -46,10 +64,22 @@ function LogIn() {
     </form>
   );
 
-  const userNotFoundError = <Alert severity="error">User not found!</Alert>;
+  const userNotFoundError = (
+    <Alert severity="error" className="log-in__error">
+      User not found!
+    </Alert>
+  );
+
+  const logInConfirmation = (
+    <div className="page-content log-in__confirmation">
+      <h1>Logged In as {loggedInUsername}</h1>
+      <p className="page-content__text">Happy shopping!</p>
+    </div>
+  );
   return (
     <div>
-      {userNotFound ? userNotFoundError : <></>} {form}
+      {userNotFound ? userNotFoundError : <></>}
+      {currentUser ? logInConfirmation : form}
     </div>
   );
 }

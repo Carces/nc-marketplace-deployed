@@ -1,20 +1,16 @@
-.about-us-container {
-  margin: 25% 30px;
+.about-us {
   padding: 10px;
   text-align: center;
-  background-color: #e6f5cd;
   border: 1px solid #dddddd;
   border-radius: 10px;
 }
 
-.about-us-container h1 {
-  margin-bottom: 10px;
+.about-us h1 {
+  margin: 10px 0;
   font-size: 1.5em;
 }
 
-.about-us-container p {
-  font-size: 1.2em;
-  line-height: 1.5;
-  margin-bottom: 10px;
+.about-us p {
+  text-align: left;
+  margin: 20px 0;
 }
-

@@ -6,10 +6,10 @@ function Footer() {
   return (
     <footer>
       <Link to="/about-us">
-        <p className="footer__text">About Us</p>
+        <p className="footer__text footer__link">About Us</p>
       </Link>
       <Link to="/contact">
-        <p className="footer__text">Contact</p>
+        <p className="footer__text footer__link">Contact</p>
       </Link>
       <p className="footer__text">© 2023</p>
     </footer>
