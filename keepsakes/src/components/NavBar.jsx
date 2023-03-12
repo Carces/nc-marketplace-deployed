@@ -13,8 +13,8 @@ import UserMenu from './UserMenu';
 function NavBar() {
   const [searchBarContents, setSearchBarContents] = useState('');
   const [userMenuShown, setUserMenuShown] = useState(false);
-  const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
-  const { basket, setBasket } = useContext(BasketContext);
+  const { currentUser } = useContext(CurrentUserContext);
+  const { basket } = useContext(BasketContext);
   const basketQuantity = basket.length;
 
   function toggleUserMenu() {
@@ -39,7 +39,7 @@ function NavBar() {
           margin: '5px',
         }}
       >
-        <img src={logo} alt="logo" id="main-logo" />
+        <img src={logo} alt="keepsakes logo" id="main-logo" />
       </Link>
 
       <form className="search-bar" action="">
@@ -68,11 +68,12 @@ function NavBar() {
         </button>
       </Link>
 
-      <button className="nav-bar__history">
-        <HistoryIcon className="nav-bar__icon" />
-      </button>
+      <Link to="/order-history">
+        <button className="nav-bar__history">
+          <HistoryIcon className="nav-bar__icon" />
+        </button>
+      </Link>
 
-      {/* <Link to="/new-listing"> */}
       <button
         id="user-button"
         className="nav-bar__user"
@@ -82,6 +83,7 @@ function NavBar() {
         {currentUser ? (
           <img
             src={currentUser.avatar_url}
+            alt={`${currentUser.username}'s avatar`}
             className="nav-bar__icon nav-bar__avatar"
           />
         ) : (
@@ -94,7 +96,7 @@ function NavBar() {
           />
         ) : null}
       </button>
-      {/* </Link> */}
+
       <div className="nav-bar__categories">
         <Link to="/items">
           <p className="nav-bar__category">All</p>

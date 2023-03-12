@@ -20,6 +20,8 @@ import LogOut from './components/LogOut';
 import SignUp from './components/SignUp';
 
 function App() {
+  const [basketsAlreadyCombined, setBasketsAlreadyCombined] = useState(false);
+
   return (
     <div className="App">
       <NavBar />
@@ -36,9 +38,30 @@ function App() {
         <Route path="/order-confirmation" element={<CheckoutConfirmation />} />
         <Route path="/order-history" element={<OrderHistory />} />
         <Route path="/profile" element={<Profile />} />
-        <Route path="/log-in" element={<LogIn />} />
-        <Route path="/log-in/:checkout" element={<LogIn />} />
-        <Route path="/log-out" element={<LogOut />} />
+        <Route
+          path="/log-in"
+          element={
+            <LogIn
+              basketsAlreadyCombined={basketsAlreadyCombined}
+              setBasketsAlreadyCombined={setBasketsAlreadyCombined}
+            />
+          }
+        />
+        <Route
+          path="/log-in/:checkout"
+          element={
+            <LogIn
+              basketsAlreadyCombined={basketsAlreadyCombined}
+              setBasketsAlreadyCombined={setBasketsAlreadyCombined}
+            />
+          }
+        />
+        <Route
+          path="/log-out"
+          element={
+            <LogOut setBasketsAlreadyCombined={setBasketsAlreadyCombined} />
+          }
+        />
         <Route path="/sign-up" element={<SignUp />} />
       </Routes>
       <Footer />

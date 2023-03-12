@@ -6,7 +6,6 @@ function Contact() {
   const [contactFormName, setContactFormName] = useState('');
   const [contactFormEmail, setContactFormEmail] = useState('');
   const [contactFormMsg, setContactFormMsg] = useState('');
-  // ... other local states for inputs
 
   return (
     <form className="page-content contact-form">

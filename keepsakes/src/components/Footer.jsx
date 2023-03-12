@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
 import '../css/nav-and-footer.css';
 
 function Footer() {

@@ -1,15 +1,17 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { fetchUser } from '../api';
+import { fetchUser, fetchBasket, postBasketItem } from '../api';
 import { CurrentUserContext } from '../contexts/CurrentUser';
+import { BasketContext } from '../contexts/Basket';
 import Alert from '@mui/material/Alert';
 import '../css/forms.css';
 
-function LogIn() {
+function LogIn({ basketsAlreadyCombined, setBasketsAlreadyCombined }) {
   const [username, setUsername] = useState('');
   const [userNotFound, setUserNotFound] = useState(false);
   const [isReturningToCheckout, setIsReturningToCheckout] = useState(false);
   const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
+  const { basket, setBasket } = useContext(BasketContext);
   const navigate = useNavigate();
   const { checkout } = useParams();
 
@@ -17,6 +19,13 @@ function LogIn() {
 
   if (isReturningToCheckout)
     delayReturnToCheckout().then(() => navigate('/checkout'));
+
+  if (currentUser && !basketsAlreadyCombined)
+    fetchBasket(loggedInUsername).then((fetchedBasket) => {
+      basket.forEach((item) => postBasketItem(item.item_id, loggedInUsername));
+      setBasketsAlreadyCombined(true);
+      setBasket([...basket, ...fetchedBasket]);
+    });
 
   function delayReturnToCheckout() {
     return new Promise(function (resolve, reject) {
@@ -35,14 +44,8 @@ function LogIn() {
           setCurrentUser(user);
           if (checkout === 'checking-out') setIsReturningToCheckout(true);
         }
-        // console.log('THEN <<<');
       })
-      .catch((err) => {
-        // setIsLoading(false);
-        // setIsError(true);
-        setUserNotFound(true);
-        // console.log('CATCH <<<');
-      });
+      .catch((err) => setUserNotFound(true));
   }
 
   const form = (

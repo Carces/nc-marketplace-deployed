@@ -14,34 +14,35 @@ function Listings() {
   const categoryNameFromURL = searchParams.get('category_name');
   const searchTermFromURL = searchParams.get('search');
 
+  // if (!categoryNameFromURL) {
+  //   const updatedSearchOptions = { ...searchOptions };
+  //   delete updatedSearchOptions.category_name;
+  //   setSearchOptions(updatedSearchOptions);
+  // }
+
   useEffect(() => {
-    setSearchOptions({
-      ...searchOptions,
-      category_name: categoryNameFromURL,
-      search: searchTermFromURL,
-    });
-  }, [searchParams]);
+    if (searchTermFromURL || categoryNameFromURL) {
+      setCurrentPage(1);
+      setSearchOptions((currentSearchOptions) => ({
+        ...currentSearchOptions,
+        category_name: categoryNameFromURL,
+        search: searchTermFromURL,
+      }));
+    }
+  }, [categoryNameFromURL, searchTermFromURL]);
 
   useEffect(() => {
     fetchListings(searchOptions, currentPage).then((items) => {
-      if (
-        !categoryNameFromURL ||
-        items.every((item) => item.category_name === categoryNameFromURL)
-      )
-        setListings(items);
+      setListings(items);
     });
-  }, [searchOptions, currentPage]);
+  }, [searchOptions, currentPage, categoryNameFromURL]);
 
   return (
     <div className="listings">
-      <SearchOptions />
-      <h1 className="listings__category-name">
-        {!searchOptions
-          ? 'Category: All'
-          : searchOptions.category_name
-          ? `Category: ${searchOptions.category_name}`
-          : 'Category: All'}
-      </h1>
+      <SearchOptions
+        searchOptions={searchOptions}
+        setSearchOptions={setSearchOptions}
+      />
       <ul className="listings__list">
         {listings.map((listing) => (
           <ItemCard listing={listing} key={listing.item_id} />

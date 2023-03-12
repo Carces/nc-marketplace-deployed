@@ -18,6 +18,12 @@ export const fetchListings = (searchOptions, currentPage) => {
     if (searchOptions.category_name)
       path += `&category_name=${searchOptions.category_name}`;
     if (searchOptions.search) path += `&search=${searchOptions.search}`;
+    if (searchOptions.sort_by) path += `&sort_by=${searchOptions.sort_by}`;
+    if (searchOptions.order) path += `&order=${searchOptions.order}`;
+    if (searchOptions.min_price)
+      path += `&min_price=${searchOptions.min_price}`;
+    if (searchOptions.max_price)
+      path += `&max_price=${searchOptions.max_price}`;
   }
 
   return api.get(path).then(({ data: { items } }) => {
@@ -59,6 +65,32 @@ export const postUser = (user) => {
 export const postItem = (item) => {
   return api.post('/items', item).then(({ data }) => {
     return data;
+  });
+};
+
+export const fetchBasket = (username) => {
+  return api.get(`/users/${username}/basket`).then(({ data: { items } }) => {
+    return items;
+  });
+};
+
+export const postBasketItem = (item_id, username) => {
+  return api
+    .post(`/users/${username}/basket`, { item_id })
+    .then(({ data: { item } }) => {
+      return item;
+    });
+};
+
+export const deleteBasketItem = (item_id, username) => {
+  return api.delete(`/users/${username}/basket/${item_id}`).then(() => {
+    return;
+  });
+};
+
+export const fetchOrders = (username) => {
+  return api.get(`/users/${username}/orders`).then(({ data: { items } }) => {
+    return items;
   });
 };
 

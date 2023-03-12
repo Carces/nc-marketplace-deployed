@@ -1,43 +1,58 @@
-import { fetchItemById } from '../api';
+import { fetchItemById, postBasketItem } from '../api';
 import { BasketContext } from '../contexts/Basket';
+import { CurrentUserContext } from '../contexts/CurrentUser';
 import Alert from '@mui/material/Alert';
-import { Link, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useState, useContext, useEffect } from 'react';
 import '../css/item-page.css';
 
 function ItemPage() {
   const [itemDetails, setItemDetails] = useState('');
-  const { setBasket } = useContext(BasketContext);
+  const { basket, setBasket } = useContext(BasketContext);
+  const { currentUser } = useContext(CurrentUserContext);
   const [itemNotFound, setItemNotFound] = useState(false);
-  const successfulBasketAdd = <Alert severity="success">Added To Basket</Alert>;
-  const itemNotFoundError = <Alert severity="error">Item not found</Alert>;
+  const [itemAlreadyInBasket, setItemAlreadyInBasket] = useState(false);
+  const [itemIsAdded, setItemIsAdded] = useState(false);
   const { item_id } = useParams();
   const { item_name, description, price, category_name, img_url } = itemDetails;
+  const loggedInUsername = !currentUser ? null : currentUser.username;
+  const navigate = useNavigate();
 
   function addToBasket() {
-    setBasket((basket) => {
-      const updatedBasket = [itemDetails, ...basket];
-      return updatedBasket;
-    });
+    setItemIsAdded(false);
+    setItemAlreadyInBasket(false);
+    if (basket.some((item) => item.item_id === +item_id))
+      setItemAlreadyInBasket(true);
+    else {
+      if (loggedInUsername) postBasketItem(item_id, loggedInUsername);
+      setBasket((basket) => {
+        setItemIsAdded(true);
+        const updatedBasket = [itemDetails, ...basket];
+        return updatedBasket;
+      });
+    }
   }
 
   function buyNow() {
-    setBasket((basket) => {
-      const updatedBasket = [itemDetails, ...basket];
-      return updatedBasket;
-    });
+    setItemAlreadyInBasket(false);
+    if (basket.some((item) => item.item_id === +item_id)) {
+      setItemAlreadyInBasket(true);
+      setItemIsAdded(false);
+    } else {
+      setBasket((basket) => {
+        const updatedBasket = [itemDetails, ...basket];
+        return updatedBasket;
+      });
+      navigate('/checkout');
+    }
   }
 
   useEffect(() => {
     setItemNotFound(false);
     fetchItemById(item_id)
-      .then((item) => {
-        setItemDetails(item);
-      })
-      .catch((err) => {
-        setItemNotFound(true);
-      });
-  }, []);
+      .then((item) => setItemDetails(item))
+      .catch((err) => setItemNotFound(true));
+  }, [item_id]);
 
   const itemPageContent = (
     <div className="page-content item-page">
@@ -49,15 +64,39 @@ function ItemPage() {
       <button className="item-page__button" onClick={addToBasket}>
         Add To Basket
       </button>
-      <Link to="/checkout">
-        <button className="item-page__button" onClick={buyNow}>
-          Buy Now
-        </button>
-      </Link>
+      <button className="item-page__button" onClick={buyNow}>
+        Buy Now
+      </button>
     </div>
   );
 
-  return <>{itemNotFound ? itemNotFoundError : itemPageContent}</>;
+  const successfulBasketAdd = (
+    <Alert severity="success" className="item-page__success">
+      Item added to basket
+    </Alert>
+  );
+  const itemNotFoundError = (
+    <Alert severity="error" className="item-page__error">
+      Item not found
+    </Alert>
+  );
+
+  const itemAlreadyInBasketError = (
+    <Alert severity="error" className="item-page__error">
+      Item is already in your basket
+    </Alert>
+  );
+
+  return (
+    <>
+      {itemIsAdded
+        ? successfulBasketAdd
+        : itemAlreadyInBasket
+        ? itemAlreadyInBasketError
+        : null}
+      {itemNotFound ? itemNotFoundError : itemPageContent}
+    </>
+  );
 }
 
 export default ItemPage;

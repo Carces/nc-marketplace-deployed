@@ -1,62 +1,70 @@
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { BasketContext } from '../contexts/Basket';
-import '../css/checkout.css';
+import { CurrentUserContext } from '../contexts/CurrentUser';
+import '../css/checkout-and-history.css';
+import Alert from '@mui/material/Alert';
+import { fetchOrders } from '../api';
 
-function Checkout() {
-  const { basket, setBasket } = useContext(BasketContext);
+function OrderHistory() {
+  const [isFetchError, setIsFetchError] = useState(false);
+  const [notloggedIn, setNotLoggedIn] = useState(false);
+  const [orderedItems, setOrderedItems] = useState([]);
+  const { currentUser } = useContext(CurrentUserContext);
 
-  function clearBasket() {
-    setBasket([]);
-  }
+  const loggedInUsername = !currentUser ? null : currentUser.username;
+  let totalSpent = 0;
+  orderedItems.forEach((item) => (totalSpent += item.price));
 
-  function removeItem(index) {
-    const updatedBasket = [...basket];
-    updatedBasket.splice(index, 1);
-    setBasket(updatedBasket);
-  }
+  useEffect(() => {
+    setIsFetchError(false);
+    if (loggedInUsername)
+      fetchOrders(loggedInUsername)
+        .then((items) => setOrderedItems(items))
+        .catch((err) => setIsFetchError(true));
+    else setNotLoggedIn(true);
+  }, [loggedInUsername]);
 
-  let total = 0;
-  basket.forEach((item) => (total += item.price));
-  const basketHTML = basket.map((item, index) => {
+  const ordersHTML = orderedItems.map((item, index) => {
     return (
-      <li className="basket__item" key={index}>
-        <button
-          className="basket__delete-button"
-          onClick={() => removeItem(index)}
-        >
-          Remove
-        </button>
-        <img className="basket__img" src={item.img_url}></img>
-        <p className="basket__price">{`£${item.price}`}</p>
-        <h2 className="basket__header">{item.item_name}</h2>
-      </li>
+      <Link to={`/items/${item.item_id}`} key={index}>
+        <li className="order-history__item">
+          <img
+            className="order-history__img"
+            alt={item.item_name}
+            src={item.img_url}
+          ></img>
+          <p className="order-history__price">{`£${item.price}`}</p>
+          <h2 className="order-history__header">{item.item_name}</h2>
+        </li>
+      </Link>
     );
   });
-  return (
-    <div className="page-content checkout">
-      <h1 className="checkout__header">Basket</h1>
-      <p className="checkout__total">Total: £{total}</p>
-      {basket.length ? (
-        <Link to="/order-confirmation">
-          <button className="checkout__button" onClick={clearBasket}>
-            Check Out
-          </button>
-        </Link>
-      ) : (
-        <button className="checkout__button disabled">Check Out</button>
-      )}
-      {basket.length ? (
-        <button className="checkout__button" onClick={clearBasket}>
-          Clear Basket
-        </button>
-      ) : (
-        <button className="checkout__button disabled">Clear Basket</button>
-      )}
 
-      <ul className="checkout__basket-list">{basketHTML}</ul>
+  const fetchOrdersError = (
+    <Alert severity="error" className="order-history__error">
+      Couldn't fetch orders
+    </Alert>
+  );
+
+  const notLoggedInError = (
+    <Alert severity="error" className="order-history__error">
+      Must be logged in to see order history
+    </Alert>
+  );
+
+  const content = (
+    <div className="page-content order-history">
+      <h1 className="order-history__page-header">Order History</h1>
+      <p className="order-history__total">Total Spent: £{totalSpent}</p>
+      <ul className="order-history__list">{ordersHTML}</ul>
     </div>
   );
+
+  return isFetchError
+    ? fetchOrdersError
+    : notloggedIn
+    ? notLoggedInError
+    : content;
 }
 
-export default Checkout;
+export default OrderHistory;

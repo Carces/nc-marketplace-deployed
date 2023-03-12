@@ -29,7 +29,6 @@
 .latest-deals__list,
 .categories__list {
   display: flex;
-  /* justify-content: center; --- FOR DESKTOP*/
   overflow-x: scroll;
   width: 100%;
   scroll-behavior: smooth;
@@ -44,9 +43,7 @@
 
 .categories__text {
   position: relative;
-  width: 96.2%;
   top: 4px;
-  left: 1px;
   padding: 2px 0;
   padding-bottom: 4px;
   font-size: 0.85em;
@@ -55,6 +52,7 @@
   border: 1px solid rgba(184, 184, 184, 0.986);
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.103);
 }
 
 .latest-deals__list::-webkit-scrollbar {
@@ -137,4 +135,26 @@
 
 .actions__button:hover {
   filter: brightness(1.05);
+}
+
+@media screen and (min-device-width: 895px) {
+  .latest-deals__list {
+    justify-content: center;
+    position: relative;
+    right: 10px;
+  }
+  .categories__img {
+    width: 100px;
+  }
+}
+
+@media screen and (min-device-width: 1180px) {
+  .latest-deals__list,
+  .categories__list {
+    gap: 30px;
+  }
+
+  .categories__img {
+    width: 150px;
+  }
 }

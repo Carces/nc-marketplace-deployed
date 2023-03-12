@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { postUser } from '../api';
 import { CurrentUserContext } from '../contexts/CurrentUser';
 import Alert from '@mui/material/Alert';

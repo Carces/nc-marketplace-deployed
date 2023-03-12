@@ -6,9 +6,7 @@ function PageControls({ currentPage, setCurrentPage, searchOptions }) {
   const [totalItems, setTotalItems] = useState(null);
 
   useEffect(() => {
-    fetchListingsLength(searchOptions).then((length) => {
-      setTotalItems(length);
-    });
+    fetchListingsLength(searchOptions).then((length) => setTotalItems(length));
   }, [searchOptions]);
 
   const pageOptions = ['Back', currentPage, 'Next'];

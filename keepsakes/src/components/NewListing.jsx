@@ -25,25 +25,19 @@ function NewListing() {
       price: newListingPrice,
       category_name: newListingCategory,
     };
-    console.log(itemObject, '<<<< ITEM OBJ NL');
     postItem(itemObject)
-      .then(() => {
-        setIsSuccessful(true);
-      })
-      .catch((err) => {
-        console.log(err, '<<<< ERR CATCH');
-        setIsError(true);
-      });
+      .then(() => setIsSuccessful(true))
+      .catch((err) => setIsError(true));
   }
 
   const newListingSuccess = (
     <div className="new-listing__success">
-      <Alert severity="success">Item Listed Successfully</Alert>
+      <Alert severity="success">Item listing added</Alert>
     </div>
   );
   const newListingError = (
     <div className="new-listing__error">
-      <Alert severity="error">Item Listing Failed</Alert>
+      <Alert severity="error">Item listing failed</Alert>
     </div>
   );
   const form = (
@@ -109,7 +103,6 @@ function NewListing() {
     </form>
   );
 
-  const logIn = <LogIn />;
   return (
     <>
       {isError ? newListingError : <></>}
@@ -122,7 +115,7 @@ function NewListing() {
           <Alert className="new-listing__log-in-warning" severity="warning">
             You must be logged in to list an item
           </Alert>
-          {logIn}
+          <LogIn />
         </>
       )}
     </>

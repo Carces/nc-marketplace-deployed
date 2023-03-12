@@ -3,8 +3,8 @@
 }
 
 .item-page__image {
-  width: 280px;
-  height: 280px;
+  width: 250px;
+  height: 250px;
   margin: auto;
   object-fit: cover;
   border: 1px solid rgb(110, 110, 110);
@@ -35,4 +35,11 @@
   border: 1px solid #858585;
   border-radius: 20px;
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.219);
+}
+
+.item-page__error,
+.item-page__success {
+  position: relative;
+  top: 60px;
+  margin-bottom: -20px;
 }

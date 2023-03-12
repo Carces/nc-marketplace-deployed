@@ -2,20 +2,24 @@ import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BasketContext } from '../contexts/Basket';
 import { CurrentUserContext } from '../contexts/CurrentUser';
-import { postOrder } from '../api';
+import { postOrder, deleteBasketItem } from '../api';
 import Alert from '@mui/material/Alert';
-import '../css/checkout.css';
+import '../css/checkout-and-history.css';
 
 function Checkout() {
   const { basket, setBasket } = useContext(BasketContext);
-  const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
+  const { currentUser } = useContext(CurrentUserContext);
   const [isError, setIsError] = useState(false);
   const navigate = useNavigate();
 
   const loggedInUsername = !currentUser ? null : currentUser.username;
-  console.log(loggedInUsername, currentUser);
 
   function clearBasket() {
+    if (loggedInUsername) {
+      basket.forEach((item) =>
+        deleteBasketItem(item.item_id, loggedInUsername)
+      );
+    }
     setBasket([]);
   }
 
@@ -37,6 +41,10 @@ function Checkout() {
   }
 
   function removeItem(index) {
+    if (loggedInUsername) {
+      const itemIDToDelete = basket[index].item_id;
+      deleteBasketItem(itemIDToDelete, loggedInUsername);
+    }
     const updatedBasket = [...basket];
     updatedBasket.splice(index, 1);
     setBasket(updatedBasket);
@@ -53,7 +61,11 @@ function Checkout() {
         >
           Remove
         </button>
-        <img className="basket__img" src={item.img_url}></img>
+        <img
+          className="basket__img"
+          alt={item.item_name}
+          src={item.img_url}
+        ></img>
         <p className="basket__price">{`£${item.price}`}</p>
         <h2 className="basket__header">{item.item_name}</h2>
       </li>
@@ -62,7 +74,7 @@ function Checkout() {
 
   const checkoutError = (
     <Alert severity="error" className="checkout__error">
-      Order Failed!
+      Order failed
     </Alert>
   );
 

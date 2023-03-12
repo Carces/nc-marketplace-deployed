@@ -2,7 +2,7 @@ import { CurrentUserContext } from '../contexts/CurrentUser';
 import { BasketContext } from '../contexts/Basket';
 import { useEffect, useContext } from 'react';
 
-function AboutUs() {
+function LogOut({ setBasketsAlreadyCombined }) {
   useEffect(() => {
     logOut();
   }, []);
@@ -12,6 +12,7 @@ function AboutUs() {
   function logOut() {
     setCurrentUser(null);
     setBasket([]);
+    setBasketsAlreadyCombined(false);
   }
   return (
     <div className="page-content log-out">
@@ -21,4 +22,4 @@ function AboutUs() {
   );
 }
 
-export default AboutUs;
+export default LogOut;
