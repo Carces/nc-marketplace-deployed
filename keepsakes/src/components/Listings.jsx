@@ -9,26 +9,43 @@ function Listings() {
   const [searchOptions, setSearchOptions] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [listings, setListings] = useState([]);
+  const [isLoading, setIsLoading] = useState(false)
+
+
+  useEffect(()=> {
+    setIsLoading(true)
+    fetchListings(searchOptions, currentPage)
+    .then((items) => {
+      setListings(previousItems => [...previousItems, ...items])
+      setIsLoading(false)
+    })
+  }, [searchOptions, currentPage])
 
   useEffect(() => {
-    fetchListings(searchOptions, currentPage).then((items) => {
-      setListings(items);
-    });
-  }, [searchOptions, currentPage]);
+    function handleScroll() {
+      if (window.innerHeight + document.documentElement.scrollTop === document.documentElement.offsetHeight) {
+        setCurrentPage(prevPage => prevPage + 1)
+      }
+    }
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   return (
     <div className="page-content listings">
       <SearchOptions />
       <ul className="listings__list">
-        {listings.map((listing) => (
-          <ItemCard listing={listing} key={listing.item_id} />
+        {listings.map((listing, index) => (
+          <ItemCard listing={listing} key={index} />
         ))}
       </ul>
-      <PageControls
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-        searchOptions={searchOptions}
-      />
+      {isLoading && <p className="listings__loading-message">Loading...</p>}
+      <button
+        className="scroll-to-top-button"
+        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+      >
+        Scroll to Top
+      </button>
     </div>
   );
 }

@@ -1,9 +1,21 @@
 import { useState, userContext, useEffect } from "react";
 import { fetchLatestDeals } from "../api";
-import '../css/latest-deals.css'
+import "../css/latest-deals.css";
 
 function LatestDeals() {
   const [latestDeals, setLatestDeals] = useState([]);
+
+  useEffect(() => {
+    fetchLatestDeals()
+      .then((data) => {
+        const shuffled = data.items.sort(() => 0.5 - Math.random());
+        const selectedItems = shuffled.slice(0, 3);
+        setLatestDeals(selectedItems);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -16,7 +28,7 @@ function LatestDeals() {
         .catch((error) => {
           console.error(error);
         });
-    }, 10000);
+    }, 5000);
     return () => clearInterval(intervalId);
   }, []);
 

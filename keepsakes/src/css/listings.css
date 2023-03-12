@@ -51,3 +51,21 @@
 .page-controls__disabled {
   color: rgb(167, 167, 167);
 }
+
+
+/* .listings__loading-message {
+  background-color: red;
+} */
+
+.scroll-to-top-button {
+  position: fixed;
+  bottom: 30px;
+  right: 20px;
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
