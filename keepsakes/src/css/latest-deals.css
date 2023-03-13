@@ -19,11 +19,26 @@
   padding-bottom: 15px;
 }
 
+.categories {
+  padding-bottom: 25px;
+}
+
+.actions {
+  text-align: center;
+  position: relative;
+  top: 50px;
+  padding-top: 10px;
+}
+
 .latest-deals__page-header,
 .categories__header {
   text-align: center;
   font-size: 1.3em;
   margin-bottom: 10px;
+}
+
+.categories__header {
+  font-size: 1em;
 }
 
 .latest-deals__list,
@@ -112,13 +127,6 @@
   display: flex;
   justify-content: center;
   font-size: 0.8em;
-}
-
-.actions {
-  text-align: center;
-  position: relative;
-  top: 50px;
-  padding-top: 16px;
 }
 
 .actions__button {

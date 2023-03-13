@@ -73,7 +73,7 @@
   justify-content: center;
   position: relative;
   bottom: 2px;
-  left: 2px;
+  right: 2px;
   gap: 5px;
   width: 150px;
   border: 1px solid rgb(160, 160, 160);
