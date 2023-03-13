@@ -78,7 +78,7 @@ function NavBar() {
         id="user-button"
         className="nav-bar__user"
         onClick={toggleUserMenu}
-        // onBlur={closeUserMenu}
+        onBlur={closeUserMenu}
       >
         {currentUser ? (
           <img
@@ -98,7 +98,7 @@ function NavBar() {
       </button>
 
       <div className="nav-bar__categories">
-        <Link to="/items">
+        <Link to="/items?category_name=All">
           <p className="nav-bar__category">All</p>
         </Link>
         <Link to="/items?category_name=Electronics">

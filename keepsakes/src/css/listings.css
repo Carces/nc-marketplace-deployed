@@ -5,12 +5,15 @@
   justify-content: center;
   position: relative;
   top: 75px;
+  margin: auto;
   margin-bottom: 86px;
+  max-width: 1100px;
 }
 
 .item-card {
   background-color: #e7e7e7;
   max-width: 150px;
+  text-align: center;
   flex: 1;
   margin: 10px;
   border: 1px solid rgb(184, 184, 184);
@@ -25,6 +28,7 @@
   width: 120px;
   height: 120px;
   object-fit: cover;
+  justify-self: center;
   border: 1px solid rgb(184, 184, 184);
   border-radius: 5px;
 }
@@ -32,6 +36,7 @@
 .item-card__header {
   font-size: 1.1em;
   margin-bottom: 5px;
+  text-align: left;
 }
 
 .item-card__price {
@@ -42,16 +47,19 @@
 
 .item-card__text {
   font-size: 0.9em;
+  text-align: left;
 }
 
 .item-card__category {
-  margin-bottom: 8px;
+  width: 112px;
+
   font-style: italic;
   font-size: 0.7em;
   border: 1px solid rgb(184, 184, 184);
   border-radius: 5px;
   padding: 5px;
-  margin: 10px 0;
+  margin: 10px auto;
+  margin-top: 0;
 }
 
 .page-controls {
@@ -83,4 +91,10 @@
 
 .page-controls__disabled {
   color: rgb(167, 167, 167);
+}
+
+@media screen and (min-device-height: 870px) {
+  .listings__list {
+    margin-top: 6.5vh;
+  }
 }

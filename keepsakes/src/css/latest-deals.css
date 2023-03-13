@@ -138,6 +138,9 @@
 }
 
 @media screen and (min-device-width: 895px) {
+  .latest-deals {
+    padding-top: 10vh;
+  }
   .latest-deals__list {
     justify-content: center;
     position: relative;

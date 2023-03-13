@@ -13,6 +13,7 @@ export const fetchListingsLength = (searchOptions) => {
 };
 
 export const fetchListings = (searchOptions, currentPage) => {
+  console.log(searchOptions, '<<<<<<<< FROM FETCH');
   let path = `/items?limit=10&p=${currentPage}`;
   if (searchOptions) {
     if (searchOptions.category_name)
@@ -25,7 +26,7 @@ export const fetchListings = (searchOptions, currentPage) => {
     if (searchOptions.max_price)
       path += `&max_price=${searchOptions.max_price}`;
   }
-
+  console.log(path);
   return api.get(path).then(({ data: { items } }) => {
     return items;
   });

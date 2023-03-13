@@ -65,3 +65,9 @@
   border-radius: 20px;
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.219);
 }
+
+@media screen and (min-device-width: 550px) {
+  .search-options {
+    padding-top: 15px;
+  }
+}

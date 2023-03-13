@@ -6,8 +6,8 @@ function AboutUs() {
       <h1>Welcome to Keepsakes!</h1>
       <p>
         We are an online store that specialises in vintage items from the past.
-        Our inventory includes items from three categories: Electronics, Relics,
-        and Household.
+        Our inventory includes items from three categories: Electronics,
+        Clothing, and Household.
       </p>
       <p>
         Whether you're a collector, a history buff, or just someone who

@@ -8,10 +8,10 @@
 }
 
 .page-content {
-  margin: 25% 30px;
-  margin-top: 0;
+  margin: auto;
+  max-width: 300px;
   position: relative;
-  top: 100px;
+  top: 15vh;
   padding: 10px;
   text-align: center;
   background-color: #e7e7e7;
@@ -30,4 +30,16 @@ body {
 
 .App {
   padding-bottom: 40px;
+}
+
+@media screen and (min-device-width: 500px) {
+  .page-content {
+    max-width: 80vw;
+  }
+}
+
+@media screen and (min-device-width: 1024px) {
+  .page-content {
+    max-width: 60vw;
+  }
 }
