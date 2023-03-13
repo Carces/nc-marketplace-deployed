@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/nc-marketplace-deployed/static/css/main.d7704a70.css",
+    "main.js": "/nc-marketplace-deployed/static/js/main.2fd1bbe4.js",
+    "static/media/logo-name-only.png": "/nc-marketplace-deployed/static/media/logo-name-only.6af7c6b358ed36b44e84.png",
+    "index.html": "/nc-marketplace-deployed/index.html",
+    "main.d7704a70.css.map": "/nc-marketplace-deployed/static/css/main.d7704a70.css.map",
+    "main.2fd1bbe4.js.map": "/nc-marketplace-deployed/static/js/main.2fd1bbe4.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d7704a70.css",
+    "static/js/main.2fd1bbe4.js"
+  ]
+}
