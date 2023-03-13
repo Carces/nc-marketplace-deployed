@@ -26,20 +26,26 @@ function App() {
     <div className="App">
       <NavBar />
       <Routes>
-        <Route path="/" element={<LatestDeals />} />
-        <Route path="/items" element={<Listings />} />
-        <Route path="/items/:item_id" element={<ItemPage />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/contact-confirmation" element={<ContactConfirmation />} />
-        <Route path="/about-us" element={<AboutUs />} />
-        <Route path="/new-listing" element={<NewListing />} />
-        <Route path="/items" element={<Listings />} />
-        <Route path="/checkout" element={<Checkout />} />
-        <Route path="/order-confirmation" element={<CheckoutConfirmation />} />
-        <Route path="/order-history" element={<OrderHistory />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="keepsakes/" element={<LatestDeals />} />
+        <Route path="keepsakes/items" element={<Listings />} />
+        <Route path="keepsakes/items/:item_id" element={<ItemPage />} />
+        <Route path="keepsakes/contact" element={<Contact />} />
         <Route
-          path="/log-in"
+          path="keepsakes/contact-confirmation"
+          element={<ContactConfirmation />}
+        />
+        <Route path="keepsakes/about-us" element={<AboutUs />} />
+        <Route path="keepsakes/new-listing" element={<NewListing />} />
+        <Route path="keepsakes/items" element={<Listings />} />
+        <Route path="keepsakes/checkout" element={<Checkout />} />
+        <Route
+          path="keepsakes/order-confirmation"
+          element={<CheckoutConfirmation />}
+        />
+        <Route path="keepsakes/order-history" element={<OrderHistory />} />
+        <Route path="keepsakes/profile" element={<Profile />} />
+        <Route
+          path="keepsakes/log-in"
           element={
             <LogIn
               basketsAlreadyCombined={basketsAlreadyCombined}
@@ -48,7 +54,7 @@ function App() {
           }
         />
         <Route
-          path="/log-in/:checkout"
+          path="keepsakes/log-in/:checkout"
           element={
             <LogIn
               basketsAlreadyCombined={basketsAlreadyCombined}
@@ -57,12 +63,12 @@ function App() {
           }
         />
         <Route
-          path="/log-out"
+          path="keepsakes/log-out"
           element={
             <LogOut setBasketsAlreadyCombined={setBasketsAlreadyCombined} />
           }
         />
-        <Route path="/sign-up" element={<SignUp />} />
+        <Route path="keepsakes/sign-up" element={<SignUp />} />
       </Routes>
       <Footer />
     </div>
