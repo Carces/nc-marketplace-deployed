@@ -38,6 +38,19 @@ function Listings() {
     });
   }, [searchOptions, currentPage]);
 
+  useEffect(() => {
+    function handleScroll() {
+      if (
+        window.innerHeight + document.documentElement.scrollTop ===
+        document.documentElement.offsetHeight
+      ) {
+        setCurrentPage((prevPage) => prevPage + 1);
+      }
+    }
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <div className="listings">
       <SearchOptions
@@ -45,15 +58,17 @@ function Listings() {
         setSearchOptions={setSearchOptions}
       />
       <ul className="listings__list">
-        {listings.map((listing) => (
-          <ItemCard listing={listing} key={listing.item_id} />
+        {listings.map((listing, index) => (
+          <ItemCard listing={listing} key={index} />
         ))}
       </ul>
-      <PageControls
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-        searchOptions={searchOptions}
-      />
+      {isLoading && <p className="listings__loading-message">Loading...</p>}
+      <button
+        className="scroll-to-top-button"
+        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+      >
+        Scroll to Top
+      </button>
     </div>
   );
 }

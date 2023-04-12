@@ -93,6 +93,19 @@
   color: rgb(167, 167, 167);
 }
 
+.scroll-to-top-button {
+  position: fixed;
+  bottom: 30px;
+  right: 20px;
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
 @media screen and (min-device-height: 870px) {
   .listings__list {
     margin-top: 6.5vh;
