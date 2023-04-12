@@ -3,7 +3,7 @@
 A React web app for buying and selling items.
 
 This repo is for the deployed version of the NC Marketplace web app. 
-The deployed version is hosted using GitHub Pages, and can be found at https://carces.github.io/nc-marketplace-deployed/#/
+The deployed version is hosted using GitHub Pages, and can be found at https://carces.github.io/nc-marketplace-deployed
 The development repo can be found at https://github.com/Carces/fe-nc-marketplace
 
 ## Table of Contents
