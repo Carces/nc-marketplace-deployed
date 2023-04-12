@@ -10,7 +10,7 @@ The development repo can be found at https://github.com/Carces/fe-nc-marketplace
 
 1.  [Documentation](#documentation)
 2.  [Credits](#credits)
-3.  [License](#support)
+3.  [License](#license)
 
 # Documentation
 
