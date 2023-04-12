@@ -29,16 +29,12 @@ As a result, the first time you view the web app, it may take around 30 seconds 
 
 Dummy data in the back-end database was created by others and may include some nonsensical entries.
 
-<br>
-
 # Credits
 
 NC Marketplace was originally produced as part of a pair-programming task for the Northcoders software development bootcamp.
 Most of the initial development was done together with my partner Reem (https://github.com/reemhd)
 
 The back-end API was supplied by Northcoders, and includes data created by other members of the Northcoders January 2023 cohort.
-
-<br>
 
 # License
 
